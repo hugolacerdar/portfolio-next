@@ -14,8 +14,20 @@ import {
 import { ImRadioChecked2, ImLink, ImGithub } from "react-icons/im";
 import { useColorModePreferences } from "../../../lib/colorModePreferencesContext";
 
-export default function Project() {
+interface ProjectProps {
+  project: {
+    title: string;
+    subtitle: string;
+    description: string;
+    stack: string[];
+    githubLink: string;
+    liveLink: string;
+  };
+}
+
+export default function Project({ project }: ProjectProps) {
   const { primary, secondary } = useColorModePreferences();
+  const { title, subtitle, description, stack, githubLink, liveLink } = project;
 
   return (
     <Grid
@@ -31,8 +43,8 @@ export default function Project() {
         {/* <Image src="example.png" alt="Project 1" /> */}
         <Center my="auto" h="100%">
           <Heading fontFamily="Bebas Neue" textAlign="center" color={primary}>
-            Upfi: <br />
-            image upload website
+            {title}: <br />
+            {subtitle}
           </Heading>
         </Center>
       </GridItem>
@@ -48,10 +60,7 @@ export default function Project() {
             fontFamily="Roboto"
             color={secondary}
           >
-            Mussum Ipsum, cacilds vidis litro abertis. Admodum accumsan
-            disputationi eu sit. Vide electram sadipscing et per. Per aumento de
-            cachacis, eu reclamis. Paisis, filhis, espiritis santis. Cevadis im
-            ampola pa arma uma pindureta.
+            {description}
           </Text>
           <Flex
             as={Link}
@@ -61,6 +70,8 @@ export default function Project() {
             fontWeight="700"
             fontFamily="Roboto"
             color={primary}
+            href={liveLink}
+            isExternal
           >
             <Icon as={ImLink} mr="3px" />
             Live version
@@ -73,6 +84,8 @@ export default function Project() {
             fontWeight="700"
             fontFamily="Roboto"
             color={primary}
+            href={githubLink}
+            isExternal
           >
             <Icon as={ImGithub} mr="3px" />
             Github Repo
@@ -84,22 +97,12 @@ export default function Project() {
           Stack
         </Heading>
         <List spacing={3} color={secondary}>
-          <ListItem>
-            <ListIcon as={ImRadioChecked2} />
-            NextJS
-          </ListItem>
-          <ListItem>
-            <ListIcon as={ImRadioChecked2} />
-            ReactJS
-          </ListItem>
-          <ListItem>
-            <ListIcon as={ImRadioChecked2} />
-            TypeScript
-          </ListItem>
-          <ListItem>
-            <ListIcon as={ImRadioChecked2} />
-            FaunaDB
-          </ListItem>
+          {stack.map((tech) => (
+            <ListItem key="tech">
+              <ListIcon as={ImRadioChecked2} />
+              {tech}
+            </ListItem>
+          ))}
         </List>
       </GridItem>
     </Grid>
