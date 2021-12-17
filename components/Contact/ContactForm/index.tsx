@@ -8,6 +8,7 @@ import {
   useToast,
   Text,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useColorModePreferences } from "../../../lib/colorModePreferencesContext";
 
@@ -19,7 +20,9 @@ interface MessageData {
 
 export default function ContactForm() {
   const { primary, secondary } = useColorModePreferences();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const toast = useToast();
+
   const emailAddressPattern =
     // eslint-disable-next-line no-control-regex
     /(?:[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g;
@@ -40,11 +43,6 @@ export default function ContactForm() {
     },
     email: {
       required: "Please fill in using your preferred email address.",
-      validate: {
-        acceptedFormats: (value: string) =>
-          emailAddressPattern.test(value) ||
-          "Invalid email format. Please check if you missed something.",
-      },
     },
     message: {
       required: "Are you forgetting to type the message?",
@@ -58,25 +56,36 @@ export default function ContactForm() {
   const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
 
-  const onSubmit = async (data: MessageData): Promise<void> => {
-    try {
-      toast({
-        status: "success",
-        title: "Message sent",
-        description:
-          "Thank you! Your message has been sent! I will get back to you as soon as I can.",
-      });
-    } catch {
-      toast({
-        status: "error",
-        title: "Message failed.",
-        description:
-          "Some error occurred when trying to send the message. Please try again.",
-      });
-    } finally {
-      reset();
-    }
+  const onSubmit = (data: MessageData): void => {
+    setIsSubmitting(true);
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.status === 200) {
+        toast({
+          status: "success",
+          title: "Message sent",
+          description:
+            "Thank you! Your message has been sent! I will get back to you as soon as I can.",
+        });
+        reset();
+      } else {
+        toast({
+          status: "error",
+          title: "Message failed",
+          description:
+            "Some error occurred when trying to send the message. Please try again.",
+        });
+      }
+      setIsSubmitting(false);
+    });
   };
+
   return (
     <Stack
       as="form"
@@ -96,6 +105,7 @@ export default function ContactForm() {
           Full Name
         </FormLabel>
         <Input
+          px="10px"
           variant="flushed"
           size="lg"
           color={secondary}
@@ -117,6 +127,7 @@ export default function ContactForm() {
           Email
         </FormLabel>
         <Input
+          px="10px"
           variant="flushed"
           size="lg"
           color={secondary}
@@ -138,6 +149,7 @@ export default function ContactForm() {
           Message
         </FormLabel>
         <Textarea
+          px="10px"
           variant="flushed"
           size="lg"
           color={secondary}
@@ -154,11 +166,8 @@ export default function ContactForm() {
         fontFamily="Bebas Neue"
         fontSize="1.225rem"
         color={primary}
-        isLoading={formState.isSubmitting}
-        isDisabled={formState.isSubmitting}
-        onClick={() =>
-          console.log(emailAddressPattern.test("hugolacerda@gmail.com"))
-        }
+        isLoading={isSubmitting}
+        isDisabled={isSubmitting}
       >
         Submit
       </Button>
