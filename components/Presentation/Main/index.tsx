@@ -13,10 +13,10 @@ export default function Name() {
   return (
     <Grid
       gridTemplateAreas={[
-        "'fullstack fullstack' 'developer developer' 'bio bio'",
-        "'fullstack' 'developer' 'bio'",
-        "'fullstack' 'developer' 'bio'",
-        "'fullstack fullstack fullstack web' 'developer developer developer bio'",
+        `'fullstack fullstack' 'developer developer' 'bio bio'`,
+        `'fullstack' 'developer' 'bio'`,
+        `'fullstack' 'developer' 'bio'`,
+        `'fullstack fullstack fullstack web' 'developer developer developer bio'`,
       ]}
     >
       <Heading

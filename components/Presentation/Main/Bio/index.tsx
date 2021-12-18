@@ -22,9 +22,9 @@ export default function Bio() {
         </Text>
         I am a developer based in São Paulo, Brazil. I truly value knowledge
         exchange, both to learn and to teach, and not only in a professional
-        context. Whether it's inventing a new recipe in the kitchen, playing a
-        board game, or solving a client’s problem, I always do my best to find
-        the ideal solution.
+        context. Whether it{`'`}s inventing a new recipe in the kitchen, playing
+        a board game, or solving a client{`'`}s problem, I always do my best to
+        find the ideal solution.
       </Text>
     </>
   );

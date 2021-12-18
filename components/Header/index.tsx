@@ -9,7 +9,7 @@ export default function Header() {
     <Flex width="100%" justify="flex-end">
       <Box my="3" mx="4">
         <Text as="strong" color={primary}>
-          HUGO LACERDA'S WEBSITE
+          HUGO LACERDA{`'`}S WEBSITE
         </Text>
         <Text color={secondary}>currently unavailable for work</Text>
       </Box>
