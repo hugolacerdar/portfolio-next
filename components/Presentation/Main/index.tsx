@@ -25,8 +25,13 @@ export default function Name() {
         fontSize={headingSizes}
         gridArea="fullstack"
       >
-        {fullstack.map((part) => (
-          <Text as="span" _hover={{ color: highlight }} transition="color 0.5s">
+        {fullstack.map((part, index) => (
+          <Text
+            as="span"
+            _hover={{ color: highlight }}
+            transition="color 0.5s"
+            key={part + index}
+          >
             {part}
           </Text>
         ))}
@@ -39,8 +44,13 @@ export default function Name() {
         display={["none", "none", "none", "block"]}
       >
         &nbsp;
-        {web.map((part) => (
-          <Text as="span" _hover={{ color: highlight }} transition="color 0.5s">
+        {web.map((part, index) => (
+          <Text
+            as="span"
+            _hover={{ color: highlight }}
+            transition="color 0.5s"
+            key={part + index}
+          >
             {part}
           </Text>
         ))}
@@ -51,8 +61,13 @@ export default function Name() {
         fontSize={headingSizes}
         gridArea="developer"
       >
-        {developer.map((part) => (
-          <Text as="span" _hover={{ color: highlight }} transition="color 0.5s">
+        {developer.map((part, index) => (
+          <Text
+            as="span"
+            _hover={{ color: highlight }}
+            transition="color 0.5s"
+            key={part + index}
+          >
             {part}
           </Text>
         ))}

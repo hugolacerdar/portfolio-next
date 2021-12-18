@@ -32,6 +32,7 @@ export default function Social() {
           as={Link}
           href={link.url}
           _hover={{ textDecoration: "none" }}
+          key={link.url}
         >
           <Icon as={link.icon} mr="10px" color={primary} />
           <Text as="span" color={secondary}>

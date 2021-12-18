@@ -98,7 +98,7 @@ export default function Project({ project }: ProjectProps) {
         </Heading>
         <List spacing={3} color={secondary}>
           {stack.map((tech) => (
-            <ListItem key="tech">
+            <ListItem key={tech}>
               <ListIcon as={ImRadioChecked2} />
               {tech}
             </ListItem>
