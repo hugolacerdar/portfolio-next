@@ -11,7 +11,7 @@ export default function Header() {
         <Text as="strong" color={primary}>
           HUGO LACERDA{`'`}S WEBSITE
         </Text>
-        <Text color={secondary}>currently unavailable for work</Text>
+        <Text color={secondary}>currently available for work </Text>
       </Box>
       <Box my="3" mx="4">
         <ColorModeSwitch />
