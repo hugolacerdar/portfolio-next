@@ -29,7 +29,7 @@ const PROJECTS: Project[] = [
       "A social blogging platform similar to DEV.to, where members can create content under their custom and unique username and publish it publicly, while readers can like posts in realtime.",
     stack: ["Next.js", "Firebase", "Firestore", "Typescript"],
     githubLink: "https://github.com/hugolacerdar/readnext-app",
-    liveLink: "https://google.com/",
+    liveLink: "https://readnext-app.vercel.app/",
   },
   {
     title: "CommuniCash API",
