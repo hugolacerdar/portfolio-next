@@ -35,7 +35,7 @@ const PROJECTS: Project[] = [
     title: "CommuniCash API",
     subtitle: "a money tracker REST API",
     description:
-      "A money tracker REST API that allows users to track incomes and expenses in communities of friends and/or family.",
+      "A money tracker REST API that allows users to track incomes and expenses in communities of friends and/or family. I am currently developing a web application to consume the API.",
     stack: ["Node.js", "Typescript", "PostgreSQL", "Express", "Docker"],
     githubLink: "https://github.com/hugolacerdar/communicash_api",
     liveLink: "https://communicash.hugolacerda.dev/api-docs/",
